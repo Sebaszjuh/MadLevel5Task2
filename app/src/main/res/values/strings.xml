@@ -11,6 +11,7 @@
 
 
 <!--    Strings for addgamefragment-->
-
+    <string name="title">Title</string>
+    <string name="platform">Platform</string>
 
 </resources>
