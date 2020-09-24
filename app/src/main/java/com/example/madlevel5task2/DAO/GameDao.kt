@@ -1,5 +1,6 @@
 package com.example.madlevel5task2.DAO
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -10,7 +11,7 @@ import com.example.madlevel5task2.Model.Game
 interface GameDAO {
 
     @Query("SELECT * FROM gameBacklog")
-    suspend fun getAllGames(): List<Game>
+    fun getAllGames(): LiveData<List<Game>>
 
     @Insert
     suspend fun insertGame(game: Game)
