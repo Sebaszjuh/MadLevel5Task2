@@ -40,7 +40,9 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
+    /**
+     * This method checks if fields or not empty / blank. Also has try catch to check date and calls dateFormatter function
+     */
     private fun isValid(
         title: String, platform: String, day: String, month: String, year: String
     ): Boolean {
@@ -67,6 +69,10 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
         }
         return true
     }
+
+    /**
+     * Puts the dates in dd-MM-YYYY format, and returns a Calender object
+     */
 
     @Throws(ParseException::class)
     fun dateFormatter(day: Int, month: Int, year: Int): Calendar {
