@@ -8,7 +8,7 @@
    <string name="historyClearButton">Delete History</string>
 
 <!--    Strings for gamebacklogfragment-->
-
+    <string name="release_date">Release: %1s</string>
 
 <!--    Strings for addgamefragment-->
     <string name="title">Title</string>

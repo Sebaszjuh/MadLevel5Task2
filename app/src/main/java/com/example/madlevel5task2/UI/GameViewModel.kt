@@ -1,8 +1,9 @@
-package com.example.madlevel5task2.Model
+package com.example.madlevel5task2.UI
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import com.example.madlevel5task2.Model.Game
 import com.example.madlevel5task2.Repository.GameRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -14,7 +14,6 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
     private val gameRepository = GameRepository(application.applicationContext)
     private val mainScope = CoroutineScope(Dispatchers.Main)
 
-
     /**
      * Add a game to the repository if the input is valid.
      */
@@ -31,10 +30,7 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
                         year.toInt()
                     )
                 )
-
             }
-
-
         }
     }
 
