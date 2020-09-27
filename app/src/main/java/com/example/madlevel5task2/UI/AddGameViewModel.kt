@@ -18,6 +18,7 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
     private val gameRepository = GameRepository(application.applicationContext)
     private val mainScope = CoroutineScope(Dispatchers.Main)
     val error = MutableLiveData<String>()
+    var succes = MutableLiveData<Boolean>()
 
     /**
      * Add a game to the repository if the input is valid.
@@ -30,13 +31,12 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
                         Game(
                             title,
                             platform,
-                            day.toInt(),
-                            month.toInt(),
-                            year.toInt()
+                            dateFormatter(day.toInt(), month.toInt(), year.toInt())
                         )
                     )
                 }
             }
+            succes.value = true
         }
     }
 
@@ -47,9 +47,11 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
         title: String, platform: String, day: String, month: String, year: String
     ): Boolean {
         if (title.isNullOrBlank() || title == "") {
+            error.value = " Please fill in a Title"
             return false
         }
         if (platform.isNullOrBlank() || platform == "") {
+            error.value = " Please fill in a Platform"
             return false;
         }
         try {
@@ -62,7 +64,7 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
         }
         try {
             dateFormatter(day.toInt(), month.toInt(), year.toInt())
-        } catch (ex: ParseException){
+        } catch (ex: ParseException) {
             ex.printStackTrace()
             error.value = "Please fill in a valid date"
             return false
@@ -76,12 +78,12 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
 
     @Throws(ParseException::class)
     fun dateFormatter(day: Int, month: Int, year: Int): Calendar {
-        val dateStr:String = String.format("%s-%s-%s", day, month, year)
-        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-        val date = formatter.parse(dateStr)
+//        val dateStr: String = String.format("%s-%s-%s", day, month, year)
+//        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
+//        val date = formatter.parse(dateStr)
         val cal = Calendar.getInstance().apply {
             isLenient = false
-            set(year, month-1, day)
+            set(year, month - 1, day)
         }
         return cal
     }
