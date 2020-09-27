@@ -5,6 +5,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.android.parcel.Parcelize
+import java.util.*
 
 @Parcelize
 @Entity(tableName = "gameBacklog")
@@ -17,13 +18,7 @@ data class Game(
     var platform: String,
 
     @ColumnInfo
-    var day: Int,
-
-    @ColumnInfo
-    var month: Int,
-
-    @ColumnInfo
-    var year: Int,
+    var release: Calendar,
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo
