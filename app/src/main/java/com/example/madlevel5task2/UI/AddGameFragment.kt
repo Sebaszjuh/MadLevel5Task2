@@ -36,7 +36,9 @@ class AddGameFragment : Fragment() {
         initResponses()
     }
 
-
+    /**
+     * On pressing the add button inputs are given to viemodel, if succesful it will return to previous screen
+     */
     private fun initViews() {
         fabAdd.setOnClickListener {
             // When save is clicked, save the game using the viewModel.
@@ -53,6 +55,9 @@ class AddGameFragment : Fragment() {
         }
     }
 
+    /**
+     * initialises response deping on the error variable for the viewModel
+     */
     private fun initResponses() {
         viewModel.error.observe(viewLifecycleOwner, Observer {
             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()

@@ -35,20 +35,11 @@ class GameAdapter(private val games: List<Game>) : RecyclerView.Adapter<GameAdap
         }
     }
 
+    /**
+     * Fromats the given date into correct format ( not American )
+     */
     fun dateFormat(date: Date): String{
         return SimpleDateFormat("dd-MMMM-yyyy", Locale.getDefault()).format(date)
-    }
-
-    @Throws(ParseException::class)
-    fun dateFormatter(day: Int, month: Int, year: Int): Calendar {
-//        val dateStr: String = String.format("%s-%s-%s", day, month, year)
-//        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-//        val date = formatter.parse(dateStr)
-        val cal = Calendar.getInstance().apply {
-            isLenient = false
-            set(year, month - 1, day)
-        }
-        return cal
     }
 
 }

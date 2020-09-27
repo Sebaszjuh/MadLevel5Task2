@@ -3,14 +3,16 @@ package com.example.madlevel5task2.UI
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.example.madlevel5task2.Exception.CustomException
 import com.example.madlevel5task2.Model.Game
 import com.example.madlevel5task2.Repository.GameRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.lang.Exception
+import java.lang.IllegalArgumentException
 import java.text.ParseException
-import java.text.SimpleDateFormat
 import java.util.*
 
 class AddGameViewModel(application: Application) : AndroidViewModel(application) {
@@ -63,9 +65,16 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
             return false
         }
         try {
-            dateFormatter(day.toInt(), month.toInt(), year.toInt())
-        } catch (ex: ParseException) {
-            ex.printStackTrace()
+            dateFormatter(day.toInt(), month.toInt(), year.toInt()).time
+        } catch (ex: Exception ) {
+            when(ex){
+                is IllegalArgumentException,
+                    is ParseException -> {
+                    ex.printStackTrace()
+                    error.value = "Please fill in a valid date"
+                }
+                else -> throw CustomException("Unknown exception")
+            }
             error.value = "Please fill in a valid date"
             return false
         }
@@ -73,14 +82,10 @@ class AddGameViewModel(application: Application) : AndroidViewModel(application)
     }
 
     /**
-     * Puts the dates in dd-MM-YYYY format, and returns a Calender object
+     * Puts the dates in dd-MM-YYYY format, and returns a Calender object, else throws a parse exception
      */
-
     @Throws(ParseException::class)
     fun dateFormatter(day: Int, month: Int, year: Int): Calendar {
-//        val dateStr: String = String.format("%s-%s-%s", day, month, year)
-//        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.getDefault())
-//        val date = formatter.parse(dateStr)
         val cal = Calendar.getInstance().apply {
             isLenient = false
             set(year, month - 1, day)

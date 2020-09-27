@@ -23,5 +23,4 @@ data class Game(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo
     var id: Long? = null
-
 ) : Parcelable
